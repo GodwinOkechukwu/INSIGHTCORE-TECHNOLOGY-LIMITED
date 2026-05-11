@@ -1,30 +1,6 @@
-/**
- * NewArrivalCard.tsx  (refactored → Popular Product Card)
- * ─────────────────────────────────────────────────────────────────────────────
- * Matches the "popular product" card design from the reference UI:
- *
- *  ┌──────────────────────────────┐
- *  │  [light-gray image area]     │
- *  │       <product image>        │
- *  ├──────────────────────────────┤
- *  │  Category label              │
- *  │  Product name (2 lines)      │
- *  │  ★ 4.0  (rating count)       │
- *  │  $28.85  $32.8  [ 🛒 Add ]   │
- *  └──────────────────────────────┘
- *
- * New props vs. original:
- *  • `category`    — small muted label above the product name  (optional)
- *  • `rating`      — numeric star score, e.g. 4.0              (optional)
- *  • `ratingCount` — review count shown in parentheses         (optional)
- *
- * All cart logic (addItem / increase / decrease) is preserved unchanged.
- * ─────────────────────────────────────────────────────────────────────────────
- */
-
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import { useCart } from "react-use-cart";
@@ -43,11 +19,11 @@ interface PopularProductCardProps {
   newAmount: string;
   description: string;
   isNew?: boolean;
-  /** Small muted category label shown above the product name  e.g. "Snack" */
+  /** Small muted category label shown below the product name  e.g. "WIRELESS AUDIO" */
   category?: string;
-  /** Star rating value displayed beside the star icon  e.g. 4.0 */
+  /** Star rating value  e.g. 4.0 */
   rating?: number;
-  /** Number of reviews shown in parentheses  e.g. 120 */
+  /** Number of reviews  e.g. 120 */
   ratingCount?: number;
 }
 
@@ -60,6 +36,7 @@ const PopularProductCard = ({
   oldAmount,
   newAmount,
   description,
+  isNew,
   category,
   rating,
   ratingCount,
@@ -85,167 +62,212 @@ const PopularProductCard = ({
 
   /* ── Render ──────────────────────────────────────────────────────────────── */
   return (
-    /*
-     * Card shell
-     * `group`             — enables child hover variants.
-     * `rounded-2xl`       — matches the rounded corners in the reference.
-     * `shadow-sm`         — subtle default shadow, lifts on hover.
-     * `transition-shadow` — smooth shadow animation on hover.
-     */
-    <div className="group relative flex flex-col w-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100">
+    <div
+      className="group relative flex flex-col w-full bg-[#0e0e0e] overflow-hidden"
+      style={{ borderRadius: "2px" }}
+    >
       {/* ═══════════════════════════════════════════════════════════════════
-          IMAGE AREA
-          Light-gray background keeps white-product images from bleeding
-          into the card background. The image is centred and contained.
+          IMAGE AREA — full-bleed, fixed aspect ratio
+          Dark background lets product photography breathe.
       ═══════════════════════════════════════════════════════════════════ */}
       <Link
         href={`/home-item/product/${slugDesc}-${id}`}
-        className="relative w-full bg-gray-50 flex items-center justify-center overflow-hidden"
-        style={{ minHeight: "180px" }}
+        className="relative block w-full overflow-hidden"
+        style={{ paddingBottom: "75%" /* 4:3 ratio */ }}
+        aria-label={description}
       >
-        {/* Product image — `object-contain` preserves product proportions */}
+        {/* Product image */}
         <Picture
           src={image}
           alt={description}
-          className="w-full h-[180px] object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
+
+        {/* Subtle gradient overlay at the bottom — helps text pop */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,10,10,0.55) 0%, transparent 50%)",
+          }}
+        />
+
+        {/* NEW RELEASE badge — top right, matching the Figma pill */}
+        {isNew && (
+          <span
+            className="absolute top-3 right-3 text-[10px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1"
+            style={{
+              background: "#F2CA50",
+              color: "#0e0e0e",
+              letterSpacing: "0.12em",
+            }}
+          >
+            New Release
+          </span>
+        )}
       </Link>
 
       {/* ═══════════════════════════════════════════════════════════════════
           CONTENT AREA
+          Editorial: generous left-aligned text, gold accent price.
       ═══════════════════════════════════════════════════════════════════ */}
-      <div className="flex flex-col flex-1 px-4 pt-3 pb-4 gap-1">
-        {/* ── Category label ─────────────────────────────────────────────
-            Small, muted, uppercase — matches the "Snack" label in the UI.
-            Rendered only when the `category` prop is provided.
-        ───────────────────────────────────────────────────────────────── */}
-        {category && (
-          <span className="text-xs text-gray-400 uppercase tracking-wider font-medium">
-            {category}
-          </span>
-        )}
-
-        {/* ── Product name ───────────────────────────────────────────────
-            Two-line clamp prevents cards in a grid from varying in height.
-            `dangerouslySetInnerHTML` retained for HTML descriptions (e.g.
-            bold fragments) — same as original.
-        ───────────────────────────────────────────────────────────────── */}
+      <div className="flex flex-col px-4 pt-3 pb-4 gap-0.5">
+        {/* ── Product name ──────────────────────────────────────────────── */}
         <Link
           href={`/home-item/product/${slugDesc}-${id}`}
-          className="text-sm font-semibold text-gray-800 line-clamp-2 leading-snug hover:text-gray-600 transition-colors"
+          className="block text-[15px] font-semibold leading-snug line-clamp-2 transition-opacity duration-200 group-hover:opacity-80"
+          style={{
+            color: "#E8E6E0",
+            fontFamily: "'Playfair Display', Georgia, serif",
+            letterSpacing: "-0.01em",
+          }}
           dangerouslySetInnerHTML={{ __html: description }}
         />
 
-        {/* ── Star rating ────────────────────────────────────────────────
-            Rendered only when a `rating` value is provided.
-            Single filled amber star + numeric score + optional count.
-        ───────────────────────────────────────────────────────────────── */}
+        {/* ── Category + price row ──────────────────────────────────────── */}
+        <div className="flex items-center gap-1.5 mt-0.5">
+          {category && (
+            <>
+              <span
+                className="text-[10px] font-medium uppercase tracking-[0.12em]"
+                style={{ color: "#6b6b6b" }}
+              >
+                {category}
+              </span>
+              <span style={{ color: "#3a3a3a", fontSize: "10px" }}>—</span>
+            </>
+          )}
+          {/* Gold price — matching Figma */}
+          <span
+            className="text-[11px] font-semibold tracking-wide"
+            style={{ color: "#F2CA50" }}
+          >
+            {price ? <FormatMoney2 value={price} /> : "N/A"}
+          </span>
+          {oldAmount && (
+            <span
+              className="text-[10px] line-through"
+              style={{ color: "#4a4a4a" }}
+            >
+              <FormatMoney2 value={parseInt(oldAmount)} />
+            </span>
+          )}
+        </div>
+
+        {/* ── Star rating (optional) ────────────────────────────────────── */}
         {rating !== undefined && (
           <div className="flex items-center gap-1 mt-0.5">
-            {/* Filled star icon using a simple SVG — no extra dependency */}
             <svg
-              className="w-4 h-4 text-amber-400 fill-current shrink-0"
+              className="w-3 h-3 shrink-0"
               viewBox="0 0 20 20"
               aria-hidden="true"
+              style={{ fill: "#F2CA50" }}
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.286 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.539-1.118l1.286-3.957a1 1 0 00-.364-1.118L2.062 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.05 2.927z" />
             </svg>
-
-            <span className="text-xs text-gray-500 font-medium leading-none">
+            <span
+              className="text-[10px] font-medium leading-none"
+              style={{ color: "#6b6b6b" }}
+            >
               {rating.toFixed(1)}
               {ratingCount !== undefined && (
-                <span className="ml-0.5 text-gray-400">({ratingCount})</span>
+                <span className="ml-0.5">({ratingCount})</span>
               )}
             </span>
           </div>
         )}
 
-        {/* ── Price row + CTA ────────────────────────────────────────────
-            Layout:  [ current price  old price ]  [ Add button / qty ]
-            `mt-auto` pushes this row to the bottom of the card content.
-        ───────────────────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between mt-auto pt-3 gap-2">
-          {/* Left: prices */}
-          <div className="flex items-baseline gap-1.5 flex-wrap">
-            <span className="text-base font-bold text-gray-900">
-              {price ? <FormatMoney2 value={price} /> : "N/A"}
-            </span>
-            {oldAmount && (
-              <span className="text-xs text-gray-400 line-through">
-                <FormatMoney2 value={parseInt(oldAmount)} />
-              </span>
-            )}
-          </div>
-
-          {/* Right: Add to cart button OR inline quantity stepper */}
+        {/* ── Cart CTA ──────────────────────────────────────────────────── */}
+        <div className="flex items-center justify-end mt-3">
           {quantity === 0 ? (
             /*
              * ADD BUTTON
-             * Compact, red-accented pill button matching the reference card.
-             * Icon + "Add" label keeps the touch target generous while
-             * staying visually lightweight.
+             * Ghost outline pill that fills on hover — refined, not noisy.
              */
             <button
               onClick={(e) => {
                 e.preventDefault();
                 addToCart();
               }}
-              className="
-                flex items-center gap-1.5
-                bg-red-500 hover:bg-red-600 active:bg-red-700
-                text-white text-xs font-semibold
-                pl-3 pr-3.5 py-2
-                rounded-lg
-                transition-colors duration-200
-                shrink-0
-              "
+              className="flex bg-black shadow-lg   text-white items-center gap-2 text-[11px] font-semibold tracking-[0.1em] uppercase px-4 py-2 transition-all duration-200"
+              style={{
+                color: "#fff",
+                letterSpacing: "0.1em",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.background =
+                  "#fff";
+                (e.currentTarget as HTMLButtonElement).style.color = "#0e0e0e";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.background =
+                  "transparent";
+                (e.currentTarget as HTMLButtonElement).style.color = "#fff";
+              }}
               aria-label="Add to cart"
             >
-              <RiShoppingCart2Fill size={14} />
-              Add
+              <RiShoppingCart2Fill fill="white" size={12} />
+              Add to cart
             </button>
           ) : (
             /*
              * INLINE QUANTITY STEPPER
-             * Replaces the Add button once the item is in the cart.
-             * Sits in the same bottom-right position — matching width kept
-             * consistent via `min-w` so the card doesn't reflow on change.
+             * Dark pill stepper that matches the card's dark theme.
              */
-            <div className="flex items-center gap-1 border border-gray-200 rounded-lg px-1 py-1 bg-gray-50 shrink-0">
-              {/* Decrease / remove */}
+            <div
+              className="flex items-center gap-1 px-1 py-1"
+              style={{ border: "1px solid #2a2a2a", background: "#1a1a1a" }}
+            >
               <button
                 onClick={(e) => {
                   e.preventDefault();
                   decrease();
                 }}
-                className="w-6 h-6 flex items-center justify-center rounded bg-white shadow-sm hover:bg-gray-100 transition-colors"
+                className="w-7 h-7 flex items-center justify-center transition-colors duration-150"
+                style={{ background: "#222", color: "#999" }}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLButtonElement).style.background =
+                    "#2a2a2a")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLButtonElement).style.background =
+                    "#222")
+                }
                 aria-label="Decrease quantity"
               >
-                <AiOutlineMinus size={11} className="text-gray-600" />
+                <AiOutlineMinus size={11} />
               </button>
 
-              {/* Current count */}
-              <span className="w-5 text-center text-xs font-bold text-gray-900 select-none">
+              <span
+                className="w-6 text-center text-xs font-bold select-none"
+                style={{ color: "#E8E6E0" }}
+              >
                 {quantity}
               </span>
 
-              {/* Increase */}
               <button
                 onClick={(e) => {
                   e.preventDefault();
                   increase();
                 }}
-                className="w-6 h-6 flex items-center justify-center rounded bg-red-500 hover:bg-red-600 transition-colors"
+                className="w-7 h-7 flex items-center justify-center transition-colors duration-150"
+                style={{ background: "#F2CA50", color: "#0e0e0e" }}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLButtonElement).style.background =
+                    "#d4ae40")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLButtonElement).style.background =
+                    "#F2CA50")
+                }
                 aria-label="Increase quantity"
               >
-                <AiOutlinePlus size={11} className="text-white" />
+                <AiOutlinePlus size={11} />
               </button>
             </div>
           )}
         </div>
-        {/* /price row */}
       </div>
-      {/* /content area */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 // 1. Core Configuration Constants
-export const SITE_NAME = "warespire innovations limited";
+export const SITE_NAME = "INSIGHTCORE TECHNOLOGY LIMITED";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   "https://warespire-innovations-limited.com"; // Update with actual URL
@@ -20,7 +20,7 @@ export const SEODATA: Record<string, SEOConfig> = {
 	default: {
 		title: `${SITE_NAME} | Empowering Businesses Through Technology`,
 		description:
-			"warespire innovations Ltd provides cutting-edge software development, AI integration, and digital transformation strategies to scale modern enterprises.",
+			"Insightcore Technology Limited provides cutting-edge software development, AI integration, and digital transformation strategies to scale modern enterprises.",
 		keywords: [
 			"Warespire Digital",
 			"Software Development Nigeria",

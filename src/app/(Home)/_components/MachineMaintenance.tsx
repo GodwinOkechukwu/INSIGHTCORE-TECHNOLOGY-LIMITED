@@ -1,107 +1,211 @@
-/**
- * MachineMaintenance.tsx
- * ─────────────────────────────────────────────────────────────────────────────
- * Promotional banner section — refactored to match the reference UI.
- *
- * Layout (reference breakdown):
- * ┌──────────────────────────┬──────────────────────────┐
- * │   LEFT · white bg        │   RIGHT · full photo      │
- * │                          │                           │
- * │   [large bold headline]  │   <compImage>             │
- * │                          │   object-cover            │
- * │   [SHOP ALL]  ←red btn   │                           │
- * └──────────────────────────┴──────────────────────────┘
- * [──── thin teal accent line spanning full width ─────]
- *
- * Key design decisions vs. original:
- *  • Column order reversed  — content left, image right  (was: image left, content right)
- *  • Background changed     — white on left              (was: black on right)
- *  • Headline colour        — near-black #111            (was: amber #DC8204)
- *  • CTA colour             — red #E8201A                (was: amber, routed to /contact-us)
- *  • CTA route              — /category (shop all)       (was: /contact-us)
- *  • Description text       — removed                    (not present in reference)
- *  • Bottom accent          — thin teal gradient rule    (new, matches reference)
- *  • Same `compImage` asset used as the right-panel photo
- * ─────────────────────────────────────────────────────────────────────────────
- */
-
-"use client";
-
-import React from "react";
-import Link from "next/link";
 import Picture from "@src/components/picture/Picture";
-import { compImage } from "@public/images";
+import { speaker } from "@public/images";
+import { Globe, Instagram, Twitter, ArrowRight } from "lucide-react";
+import { journalbg } from "@public/images";
 
-const MachineMaintenance = () => {
+export default function MachineMaintenance() {
+  const features = [
+    {
+      title: "HAND-ASSEMBLED",
+      description:
+        "Each unit is meticulously tuned by master acoustic engineers.",
+      icon: "✦",
+    },
+    {
+      title: "AEROSPACE GRADE MATERIALS",
+      description:
+        "Utilizing lightweight carbon fiber and surgical-grade titanium.",
+      icon: "⌘",
+    },
+    {
+      title: "PROPRIETARY WAVEGUIDES",
+      description:
+        "Creating a soundstage that mimics the physics of a live concert hall.",
+      icon: "◉",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote:
+        "The Zenith Pro doesn't just play music; it creates a spatial dimension I've never experienced in headphones before.",
+      name: "JULIAN THORNE",
+      role: "AUDIO PHILE MAGAZINE",
+    },
+    {
+      quote:
+        "They have successfully bridged the gap between scientific precision and emotional warmth.",
+      name: "ELENA MORETTI",
+      role: "SOUND ARCHITECTURE",
+    },
+    {
+      quote:
+        "The Monolith towers are not just speakers, they are pieces of high-performance sculpture.",
+      name: "MARCUS VANE",
+      role: "LUXURY TECH DIGEST",
+    },
+  ];
+
   return (
-    /*
-     * Section wrapper
-     * ─────────────────────────────────────────────────────────────────────────
-     * `relative`          — stacking context for the bottom accent line.
-     * `overflow-hidden`   — clips the image to the section boundary.
-     * `pb-[3px]`          — reserves 3 px of height for the accent line so it
-     *                       doesn't overlap content.
-     * Grid: equal halves on md+, single column (image stacked below) on mobile.
-     */
-    <section className="relative grid grid-cols-1 md:grid-cols-2 bg-white overflow-hidden border-t">
-      {/* ═══════════════════════════════════════════════════════════════════
-          COLUMN 2 · Content (left on desktop, top on mobile)
-          White background, generous horizontal padding, vertically centred.
-      ═══════════════════════════════════════════════════════════════════ */}
-      <div
-        className="relative
-    before:absolute before:top-0 before:left-0 before:w-full before:h-[2px]
-    before:bg-gradient-to-r before:from-#616980 before:via-#6174b0 before:to-#bbcced
-    after:absolute after:bottom-0 after:left-0 after:w-full after:h-[4px]
-    after:bg-gradient-to-r after:from-#1c6973 after:via-green-400 after:to-#bbcced flex flex-col justify-center bg-white px-10 sm:px-14 lg:px-20 py-12 md:py-16"
-      >
-        {/* ── Main headline ───────────────────────────────────────────────
-            Heavy weight, dark colour, large size — matches the editorial
-            typographic style in the reference.
-            `leading-snug` tightens the multi-line headline for visual density.
-        ────────────────────────────────────────────────────────────────── */}
-        <h2 className="text-[28px] sm:text-[34px] lg:text-[40px] font-bold text-[#111111] leading-snug tracking-tight max-w-[500px] mb-8">
-          Our products are 100% guarantee to last for at least 10 years.
-        </h2>
+    <>
+      <section className="bg-[#0D0E0F] text-white min-h-screen flex items-center justify-center px-4 py-16">
+        <div className="w-full max-w-7xl   px-6 py-12 md:px-12 lg:px-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+            {/* Left Side */}
+            <div className="relative flex justify-center lg:justify-start">
+              {/* Placeholder Image */}
+              <div className="relative w-[280px] sm:w-[340px] md:w-[420px]">
+                <div className="aspect-[4/3] rounded-xl shadow-2xl flex items-center justify-center">
+                  <Picture className="" alt="speaker" src={speaker} />
+                </div>
 
-        {/* ── CTA button ──────────────────────────────────────────────────
-            Solid red fill, white uppercase text, wide letter-spacing,
-            sharp corners (rounded-none) — all matching the reference exactly.
-            `active:scale-95` adds tactile press feedback.
-        ────────────────────────────────────────────────────────────────── */}
-        <Link
-          href="/category"
-          className="
-            w-[274px]
-            bg-[#E8201A] hover:bg-[#c41b15]
-            text-white
-            text-xs font-semibold text-center
-            uppercase tracking-[0.18em]
-            px-8 py-3
-            rounded-[8px]
-            transition-colors duration-200
-            active:scale-95
-          "
-        >
-          Shop All
-        </Link>
-      </div>
+                {/* Floating Card */}
+                <div className=" hidden md:block absolute -bottom-10 left-0 sm:left-8 bg-gradient-to-r from-[#2a220d] via-[#1a1609] to-[#0d0d0d] border border-yellow-700/20 px-6 py-6 w-[220px] sm:w-[260px] backdrop-blur-sm opacity-80 shadow-2xl">
+                  <h3 className="text-4xl font-serif text-[#d4af37]">0.001%</h3>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          COLUMN 1 · Photo (right on desktop, bottom on mobile)
-          Fixed height on mobile so the image doesn't collapse.
-          On md+ the height stretches to match the content column via the
-          grid's implicit row height.
-      ═══════════════════════════════════════════════════════════════════ */}
-      <div className="relative w-full h-[260px] md:h-[523px] min-h-[260px]">
-        <Picture
-          src={compImage}
-          alt="Gaming setup with monitor, PC tower, mechanical keyboard and headphones"
-          className="w-full h-full object-cover"
-        />
-      </div>
-    </section>
+                  <p className="mt-2 text-[11px] tracking-[0.25em] text-zinc-300 uppercase">
+                    Total Harmonic Distortion
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side */}
+            <div>
+              <p className="text-[#c8a74e] uppercase tracking-[0.35em] text-xs font-semibold mb-5">
+                Our Craft
+              </p>
+
+              <h2 className="text-4xl font-playfair sm:text-5xl lg:text-6xl leading-tight text-white">
+                Beautiful and fast
+              </h2>
+
+              <p className="mt-6 text-zinc-400 text-base sm:text-lg leading-relaxed max-w-xl">
+                Every product is a testament to the of speed and well structured
+                design.
+              </p>
+
+              {/* Features */}
+              <div className="mt-10 divide-y divide-zinc-800 border-t border-b border-zinc-800">
+                {features.map((feature, index) => (
+                  <div key={index} className="py-6 flex items-start gap-4">
+                    <div className="text-[#c8a74e] text-lg mt-1">
+                      {feature.icon}
+                    </div>
+
+                    <div>
+                      <h3 className="text-sm sm:text-base tracking-[0.2em] font-semibold text-white uppercase">
+                        {feature.title}
+                      </h3>
+
+                      <p className="mt-2 text-zinc-400 text-sm sm:text-base leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-[#121414] text-white py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto  px-6 py-16 sm:px-10 lg:px-20">
+          {/* Header */}
+          <div className="text-center">
+            <p className="text-[#c8a74e] uppercase tracking-[0.35em] text-[11px] font-semibold">
+              The Critical Consensus
+            </p>
+
+            <h2 className="mt-4 font-playfair text-4xl sm:text-5xl text-zinc-100">
+              Resonance &amp; Acclaim
+            </h2>
+          </div>
+
+          {/* Cards */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {testimonials.map((item, index) => (
+              <div
+                key={index}
+                className="bg-[#1B1C1C] border border-zinc-800 px-8 py-10 min-h-[420px] flex flex-col justify-between transition duration-300 hover:border-zinc-700"
+              >
+                <div>
+                  {/* Stars */}
+                  <div className="text-[#c8a74e] tracking-[0.2em] text-sm">
+                    ★★★★★
+                  </div>
+
+                  {/* Quote */}
+                  <p className="mt-8 font-playfair text-3xl leading-[1.45] italic text-zinc-100">
+                    “{item.quote}”
+                  </p>
+                </div>
+
+                {/* Footer */}
+                <div className="mt-12">
+                  <h4 className="text-sm tracking-[0.2em] font-semibold text-zinc-100 uppercase">
+                    {item.name}
+                  </h4>
+
+                  <p className="mt-2 text-[11px] tracking-[0.2em] text-zinc-500 uppercase">
+                    {item.role}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-black text-white">
+        {/* Newsletter Section */}
+        <section className="relative overflow-hidden border-y border-zinc-900">
+          {/* Background */}
+          <div className="absolute inset-0 z-0 opacity-10">
+            <Picture
+              src={journalbg}
+              alt="Laptop keyboard — top-notch accessories backdrop"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-20 py-28">
+            <div className="max-w-3xl mx-auto text-center">
+              <p className="text-[#c8a74e] uppercase tracking-[0.35em] text-[11px] font-semibold">
+                Private Listening Journal
+              </p>
+
+              <h2 className="mt-5 font-playfair text-5xl sm:text-6xl text-zinc-100 leading-tight">
+                Join the Journal
+              </h2>
+
+              <p className="mt-6 text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+                Receive exclusive access to private events, early product
+                launches, and editorial insights crafted for modern audiophiles.
+              </p>
+
+              {/* Newsletter Form */}
+              <form className="mt-12">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 border border-zinc-800 bg-zinc-950/70 backdrop-blur-xl rounded-3xl sm:rounded-full p-3 sm:p-2 max-w-2xl mx-auto">
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="flex-1 bg-transparent px-4 sm:px-5 py-4 text-sm text-white placeholder:text-zinc-500 outline-none w-full"
+                  />
+
+                  <button
+                    type="submit"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c8a74e] hover:bg-[#d6b766] text-black text-xs tracking-[0.25em] uppercase font-semibold px-6 sm:px-7 py-4 rounded-2xl sm:rounded-full transition duration-300"
+                  >
+                    Subscribe
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </section>
+    </>
   );
-};
-
-export default MachineMaintenance;
+}

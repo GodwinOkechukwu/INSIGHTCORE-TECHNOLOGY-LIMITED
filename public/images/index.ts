@@ -9,6 +9,7 @@ import homeImage4 from "./home-img-4.png";
 import homeImage5 from "./home-img-5.png";
 import heroImage from "./heroImage.png";
 import homeImage6 from "./home-img-6.png";
+import journalbg from "./journal.png"
 import superDiscountImg from "./super-discount-img.png";
 import superProductImage from "./super-product-img.png";
 import computerOfficeImg from "./computer-office-img.png";
@@ -17,10 +18,11 @@ import officeImg1 from "./office-img.png";
 import confetti from "./confetti.png";
 import banner from "./banner.png";
 import heroImage2 from "./heroImage2.png";
-import logoImage from "./logo.png";
+import logoImage from "./logoo.png";
 import heroImage3 from "./heroImage3.png";
 import heroImage4 from "./heroImage4.png";
-import heroBg from "./hero-bg.jpg";
+import heroBg from "./headsetbg.png";
+import speaker from "./speaker.png"
 import machineImage from "./machine-image.png";
 import speedImage from "./speedImage.png";
 import securityImage from "./securityImage.png";
@@ -56,6 +58,8 @@ export {
 	categoryImg,
 	categoryImg1,
 	categoryImg2,
+	speaker,
+	journalbg
 };
 
 export const fashionSnip = {

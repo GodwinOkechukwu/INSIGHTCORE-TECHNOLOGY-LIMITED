@@ -196,7 +196,7 @@ const Header = () => {
 
   const { baseCurrency } = useAppSelector((state) => state.currency);
   const [isPending, startTransition] = useTransition();
-
+  const [showSearch, setShowSearch] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -252,9 +252,11 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex flex-col w-full bg-white z-[100] fixed top-0 border-b border-white/5 shadow-2xl transition-all">
+      <header className="flex flex-col w-full bg-[#121414CC] opacity-80 z-[100] fixed top-0 border-b border-white/5 shadow-2xl transition-all">
         {/* Desktop Header */}
-        <div className="hidden slg:grid grid-cols-3 items-center justify-stretch w-full py-3 max-w-[1350px] mx-auto">
+        <div
+          className={`hidden slg:grid ${showSearch ? "grid-cols-3 " : "grid-cols-2 "} items-center justify-stretch w-full py-3 max-w-[1350px] mx-auto`}
+        >
           {/* 1. Logo */}
           <div className="col-span-1 flex items-center gap-10 ">
             <div className=" ">
@@ -266,22 +268,30 @@ const Header = () => {
             </div>
           </div>
           {/* 2. Search Bar */}
-          <div className="col-span-1 flex justify-center ">
-            <div className="relative w-full max-w-[550px] group">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
-              <input
-                type="text"
-                placeholder="Search hardware, accessories..."
-                className="w-full h-11 text-sm text-gray-500 rounded-3xl pl-12 pr-5 outline-none focus:border-blue-500/50 transition bg-gray-200"
-                onChange={(e) => setSearchValue(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              />
+          {showSearch && (
+            <div className="col-span-1 flex justify-center ">
+              <div className="relative w-full max-w-[550px] group">
+                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
+                <input
+                  type="text"
+                  placeholder="Search hardware, accessories..."
+                  className="w-full h-11 text-sm text-gray-500 rounded-3xl pl-12 pr-5 outline-none focus:border-blue-500/50 transition bg-gray-200"
+                  onChange={(e) => setSearchValue(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 3. Controls */}
           <div className="col-span-1 flex items-center justify-end gap-6">
             {/* STABLE CURRENCY DROPDOWN */}
+            <FiSearch
+              onClick={() => {
+                setShowSearch(!showSearch);
+              }}
+              className="relative cursor-pointer top-[10px] -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors"
+            />
             <Menu as="div" className="relative inline-block text-left">
               {({ open }) => (
                 <>
@@ -344,87 +354,91 @@ const Header = () => {
             </div>
 
             {/* STABLE USER DROPDOWN */}
-            <Menu as="div" className="relative inline-block text-left">
-              {({ open }) => (
-                <>
-                  <Menu.Button className="flex items-center gap-2 cursor-pointer group outline-none focus:ring-0">
-                    {wc_customer_info?.shipping?.address_2 ? (
-                      <Picture
-                        src={wc_customer_info.shipping.address_2}
-                        alt="user"
-                        className="size-9 rounded-full border border-white/10"
+            {email && (
+              <Menu as="div" className="relative inline-block text-left">
+                {({ open }) => (
+                  <>
+                    <Menu.Button className="flex items-center gap-2 cursor-pointer group outline-none focus:ring-0">
+                      {wc_customer_info?.shipping?.address_2 ? (
+                        <Picture
+                          src={wc_customer_info.shipping.address_2}
+                          alt="user"
+                          className="size-9 rounded-full border border-white/10"
+                        />
+                      ) : (
+                        <div className="size-9 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-black text-xs">
+                          {getFirstCharacter(
+                            wc_customer_info?.first_name || "U",
+                          )}
+                        </div>
+                      )}
+                      <SlArrowDown
+                        className={`text-[10px] text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
                       />
-                    ) : (
-                      <div className="size-9 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-black text-xs">
-                        {getFirstCharacter(wc_customer_info?.first_name || "U")}
-                      </div>
-                    )}
-                    <SlArrowDown
-                      className={`text-[10px] text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-                    />
-                  </Menu.Button>
+                    </Menu.Button>
 
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 mt-2 w-52 origin-top-right bg-[#111111] border border-white/10 rounded-2xl shadow-2xl p-1.5 z-[110] outline-none">
-                      <div className="px-3 py-2 mb-1 border-b border-white/5">
-                        <p className="text-xs text-gray-500">Logged in as</p>
-                        <p className="text-sm font-bold text-white truncate">
-                          {wc_customer_info?.first_name}
-                        </p>
-                      </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 mt-2 w-52 origin-top-right bg-[#111111] border border-white/10 rounded-2xl shadow-2xl p-1.5 z-[110] outline-none">
+                        <div className="px-3 py-2 mb-1 border-b border-white/5">
+                          <p className="text-xs text-gray-500">Logged in as</p>
+                          <p className="text-sm font-bold text-white truncate">
+                            {wc_customer_info?.first_name}
+                          </p>
+                        </div>
 
-                      <div className="flex flex-col gap-0.5">
-                        {userDropDownLinks.map((item) => (
-                          <Menu.Item key={item.id}>
-                            {({ active }) => (
-                              <button
-                                onClick={(e) => {
-                                  if (item.onClick) {
-                                    e.preventDefault();
-                                    item.onClick();
-                                  } else if (item.href) {
-                                    router.push(item.href);
-                                  }
-                                }}
-                                className={`${
-                                  active
-                                    ? "bg-white/5 text-white"
-                                    : "text-gray-300"
-                                } flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors`}
-                              >
-                                <span className="text-lg">{item.icon}</span>
-                                {item.label}
-                              </button>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </div>
+                        <div className="flex flex-col gap-0.5">
+                          {userDropDownLinks.map((item) => (
+                            <Menu.Item key={item.id}>
+                              {({ active }) => (
+                                <button
+                                  onClick={(e) => {
+                                    if (item.onClick) {
+                                      e.preventDefault();
+                                      item.onClick();
+                                    } else if (item.href) {
+                                      router.push(item.href);
+                                    }
+                                  }}
+                                  className={`${
+                                    active
+                                      ? "bg-white/5 text-white"
+                                      : "text-gray-300"
+                                  } flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors`}
+                                >
+                                  <span className="text-lg">{item.icon}</span>
+                                  {item.label}
+                                </button>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </div>
 
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            onClick={() => signOut()}
-                            className={`${
-                              active ? "bg-red-500/10" : ""
-                            } flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-red-500 font-bold transition-colors mt-1`}
-                          >
-                            <FiLogOut /> Log Out
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </>
-              )}
-            </Menu>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={() => signOut()}
+                              className={`${
+                                active ? "bg-red-500/10" : ""
+                              } flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-red-500 font-bold transition-colors mt-1`}
+                            >
+                              <FiLogOut /> Log Out
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </>
+                )}
+              </Menu>
+            )}
           </div>
         </div>
 
