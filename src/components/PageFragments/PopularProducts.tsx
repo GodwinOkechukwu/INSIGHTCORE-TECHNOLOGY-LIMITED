@@ -31,7 +31,7 @@ import PopularProductCard from "../Cards/PopularProductCard";
 ───────────────────────────────────────────────────────────────────────────── */
 
 /** How many products to load per page. */
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 6;
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Skeleton Loader
@@ -225,12 +225,13 @@ export default function PopularProducts() {
 
   /* ── Render: main ──────────────────────────────────────────────────────── */
   return (
-    <div className="min-h-screen  bg-white">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12">
+    <div className="min-h-screen bg-[#121414] ">
+      <div className="max-w-[1400px] mx-auto px-4  md:px-6 lg:px-8 py-8 md:py-12">
         {/* ── Page Header ─────────────────────────────────────────────── */}
         <div className="mb-4 md:mb-6">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 mb-3">
-            Popular Products
+          <p className="text-[#F2CA50] text-[11px]">CURATED SELECTION</p>
+          <h1 className="font-playfair font-semibold text-3xl md:text-4xl lg:text-5xl text-[#E3E2E2] mb-3">
+            The Collection
           </h1>
           <p className="text-base md:text-lg text-gray-500">
             {products.length > 0
@@ -242,7 +243,7 @@ export default function PopularProducts() {
         {/* ── Products Grid ───────────────────────────────────────────── */}
         {products.length > 0 ? (
           <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4 lg:gap-5">
+            <div className="grid grid-cols-2  gap-3 md:gap-4 lg:gap-5">
               {products.map((product: ProductType) => (
                 <PopularProductCard
                   key={product.id}
@@ -280,10 +281,11 @@ export default function PopularProducts() {
                   className="
                     flex items-center gap-2
                     px-8 py-3
-                    border-2 border-gray-900
+                    border-2 border-[#F2CA50]
+                    bg-[#F2CA50]
                     text-gray-900 font-semibold text-sm
                     rounded-lg
-                    hover:bg-gray-900 hover:text-white
+                    hover:bg-[#F2CA50]/80 hover:text-white
                     disabled:opacity-50 disabled:cursor-not-allowed
                     transition-all duration-200
                   "

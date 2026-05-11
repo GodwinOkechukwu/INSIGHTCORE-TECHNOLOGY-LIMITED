@@ -15,6 +15,8 @@ const config: Config = {
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
         plushTrial: ["Plush Trial", "sans-serif"],
+        playfair: ["var(--font-playfair)"],
+
       },
       colors: {
         transparent: "transparent",

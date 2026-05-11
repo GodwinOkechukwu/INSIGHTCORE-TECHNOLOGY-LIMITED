@@ -166,14 +166,17 @@ const AllCategorySection = () => {
           `px-6`         — horizontal breathing room on narrow viewports.
           `max-w-2xl`    — constrains the copy width for comfortable line-lengths.
       ──────────────────────────────────────────────────────────────────────── */}
-        <div className="relative z-20 flex flex-col items-center text-center px-6 max-w-2xl mx-auto space-y-6">
+        <div className="relative z-20 flex flex-col md:right-[30%] mt-20 md:mt-0  text-justify px-6 max-w-2xl mx-auto space-y-6">
           {/* ── Headline ───────────────────────────────────────────────────────
             Large, high-contrast serif-influenced display heading.
             `tracking-tight` tightens letter-spacing for display sizes.
             `leading-tight`  ensures comfortable multi-line reading.
         ──────────────────────────────────────────────────────────────────── */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-normal text-white leading-tight tracking-tight">
-            Buy Your Top Notch <br className="hidden sm:block" /> Accessories
+          <p className="text-sm text-[#F2CA50] text-[11px]">MASTERY OF SOUND</p>
+          <h1 className="text-4xl font-playfair font-bold sm:text-5xl lg:text-7xl text-white leading-tight tracking-tight">
+            Pure Audio.
+            <br className="" />
+            <span className="text-[#F2CA50]  italic">Uncompromised.</span>
           </h1>
 
           {/* ── Sub-copy ───────────────────────────────────────────────────────
@@ -181,9 +184,9 @@ const AllCategorySection = () => {
             without disappearing. `max-w-md` keeps line-lengths readable.
         ──────────────────────────────────────────────────────────────────── */}
           <p className="text-gray-300 text-sm sm:text-base lg:text-[16px] leading-relaxed max-w-md">
-            They say that home is where the heart is. Perhaps that&apos;s why a
-            feeling of loss is so apparent when you are far from the ones you
-            love.
+            Experience sound as it was meant to be heard. Meticulously
+            engineered for those who demand acoustic perfection and
+            architectural elegance.
           </p>
 
           {/* ── Call-to-action ─────────────────────────────────────────────────
@@ -192,24 +195,49 @@ const AllCategorySection = () => {
             `transition-all duration-200` — smooth scale + colour transition.
             `hover:scale-105`           — gentle lift on hover for interactivity.
         ──────────────────────────────────────────────────────────────────── */}
-          <div className="pt-2">
-            <Link
-              href="/category"
-              className="
+          <div className="flex flex-col md:flex-row gap-5 max-w-5xl">
+            <div className="pt-2">
+              <Link
+                href="/category"
+                className="
               inline-block
-              bg-white hover:bg-gray-100
+              bg-[#F2CA50] hover:bg-[#F2CA50]/90
               text-black
               text-[18px]
               font-normal
+              font-serif
               px-10 py-3
               rounded-lg
               transition-all duration-200
               hover:scale-105
               focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white
             "
-            >
-              Order Now
-            </Link>
+              >
+                EXPLORE SERIES ONE
+              </Link>
+            </div>
+            <div className="pt-2">
+              <Link
+                href="/category"
+                className="
+              inline-block
+              bg-transparent hover:bg-gray-100
+              border
+              border-[#fff]/80
+              text-white
+              text-[18px]
+              font-normal
+              font-serif
+              px-10 py-3
+              rounded-lg
+              transition-all duration-200
+              hover:scale-105
+              focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white
+              "
+              >
+                VIEW CATALOG
+              </Link>
+            </div>
           </div>
         </div>
         {/* /foreground content */}
