@@ -1,13 +1,13 @@
 /**
  * Centralised table-name registry.
  *
- * The prefix is read from the TABLE_PREFIX environment variable (default: "insightcore_").
+ * The prefix is read from the TABLE_PREFIX environment variable (default: "insightcoretech_").
  * Set TABLE_PREFIX in your .env file to change it for every table at once.
  *
  * Example .env entry:
- *   TABLE_PREFIX=insightcore_
+ *   TABLE_PREFIX=insightcoretech_
  */
-const prefix = process.env.TABLE_PREFIX ?? "insightcore_";
+const prefix = process.env.TABLE_PREFIX ?? "insightcoretech_";
 
 export const T = {
 	users:              `${prefix}users`,
