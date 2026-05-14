@@ -166,7 +166,7 @@ const AllCategorySection = () => {
           `px-6`         — horizontal breathing room on narrow viewports.
           `max-w-2xl`    — constrains the copy width for comfortable line-lengths.
       ──────────────────────────────────────────────────────────────────────── */}
-        <div className="relative z-20 flex flex-col md:right-[30%] mt-20 md:mt-0  text-justify px-6 max-w-2xl mx-auto space-y-6">
+        <div className="relative z-20 flex flex-col md:right-[25%] mt-20 md:mt-0  text-justify px-6 max-w-2xl mx-auto space-y-6">
           {/* ── Headline ───────────────────────────────────────────────────────
             Large, high-contrast serif-influenced display heading.
             `tracking-tight` tightens letter-spacing for display sizes.
@@ -221,7 +221,7 @@ const AllCategorySection = () => {
                 href="/category"
                 className="
               inline-block
-              bg-transparent hover:bg-gray-100
+              bg-transparent 
               border
               border-[#fff]/80
               text-white
