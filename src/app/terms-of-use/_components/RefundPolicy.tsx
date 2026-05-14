@@ -70,7 +70,7 @@ const RefundPolicy = () => {
           </li>
           <li>
             <strong>Shipping Costs:</strong> If a return is approved because of
-            our error, Warespire Import covers the return shipping. For all
+            our error, insightcore Import covers the return shipping. For all
             other approved returns, the customer bears the cost.
           </li>
         </ul>
@@ -81,7 +81,7 @@ const RefundPolicy = () => {
           4. Missing Items & Supplier Discrepancies
         </h3>
         <p>
-          At Warespire Import, we act as your dedicated procurement agent. While
+          At insightcore Import, we act as your dedicated procurement agent. While
           we vet suppliers, we do not control their internal packing process. In
           the rare event that a supplier fails to ship an item or sends an
           incomplete order, the following policy applies:
