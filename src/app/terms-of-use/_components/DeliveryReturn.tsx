@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-
+import { SITE_NAME } from "@constants/seoContants";
 const DeliveryReturn = () => {
   return (
     <div className="text-slate-600 space-y-12 pb-10">
@@ -10,13 +10,10 @@ const DeliveryReturn = () => {
           Logistics & Fulfillment Policy
         </h3>
         <p className="text-sm md:text-base leading-relaxed max-w-4xl">
-          At{" "}
-          <span className="font-bold text-slate-900">
-            Warespire Innovations
-          </span>
-          , we prioritize the integrity of your cargo. From international
-          arrival to last-mile delivery, we utilize a strictly monitored courier
-          network to ensure your procurement reaches you in pristine condition.
+          At <span className="font-bold text-slate-900">{SITE_NAME}</span>, we
+          prioritize the integrity of your cargo. From international arrival to
+          last-mile delivery, we utilize a strictly monitored courier network to
+          ensure your procurement reaches you in pristine condition.
         </p>
       </div>
 
@@ -132,8 +129,8 @@ const DeliveryReturn = () => {
           <p>
             •{" "}
             <span className="font-bold text-slate-800">Transfer of Risk:</span>{" "}
-            Warespire Innovations bears no responsibility for items signed for
-            by unauthorized third parties.
+            {SITE_NAME} bears no responsibility for items signed for by
+            unauthorized third parties.
           </p>
           <p>
             •{" "}

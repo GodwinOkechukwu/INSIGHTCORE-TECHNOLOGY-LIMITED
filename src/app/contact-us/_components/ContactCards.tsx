@@ -6,6 +6,7 @@ import React from "react";
 import { FiPhoneCall, FiClock, FiMessageSquare } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
 import { RxEnvelopeClosed } from "react-icons/rx";
+import { SITE_EMAIL } from "@constants/seoContants";
 
 /* ─────────────────────────────────────────────
    Card skeleton
@@ -101,7 +102,7 @@ const ContactCards = () => {
           {/* Headline */}
           <h1 className="text-[clamp(38px,6vw,72px)] font-bold tracking-tight leading-[1.05] mb-5">
             Get in{" "}
-            <span className="italic font-light text-gray-700">Touch</span>
+            <span className="italic font-light text-[#F2CA50]">Touch</span>
           </h1>
 
           <p className="text-base sm:text-lg text-white/50 font-light leading-relaxed max-w-lg mx-auto">
@@ -150,7 +151,7 @@ const ContactCards = () => {
               Send a Message
             </p>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
-              Send an email to support@warespire.com. We'll get back to you
+              Send an email to {SITE_EMAIL}. We'll get back to you
               shortly
             </h2>
           </div>

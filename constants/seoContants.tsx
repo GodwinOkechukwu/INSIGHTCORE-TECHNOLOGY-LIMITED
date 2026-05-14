@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 
 // 1. Core Configuration Constants
-export const SITE_NAME = "INSIGHTCORE TECHNOLOGY LIMITED";
+export const SITE_NAME = "Insightcore Technology Limited";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://warespire-innovations-limited.com"; // Update with actual URL
-export const TWITTER_HANDLE = "@warespireinnovations";
+  "http://insightstack-limited.com"; // Update with actual URL
+export const TWITTER_HANDLE = "@insightcoretech";
+export const SITE_EMAIL = "support@insightstack.com"
 
 interface SEOConfig {
 	title: string;
@@ -22,7 +23,7 @@ export const SEODATA: Record<string, SEOConfig> = {
 		description:
 			"Insightcore Technology Limited provides cutting-edge software development, AI integration, and digital transformation strategies to scale modern enterprises.",
 		keywords: [
-			"Warespire Digital",
+			"insightstack Digital",
 			"Software Development Nigeria",
 			"Digital Transformation",
 			"AI Solutions for Business",
@@ -35,7 +36,7 @@ export const SEODATA: Record<string, SEOConfig> = {
 	home: {
 		title: `${SITE_NAME} | Leading Digital Solutions & Tech Excellence`,
 		description:
-			"Innovate and grow with Warespire. We build high-performance digital products, from mobile apps to enterprise AI systems, tailored to your business needs.",
+			"Innovate and grow with insightstack. We build high-performance digital products, from mobile apps to enterprise AI systems, tailored to your business needs.",
 		keywords: [
 			"Mobile App Development",
 			"Enterprise Software",
@@ -83,19 +84,19 @@ export const SEODATA: Record<string, SEOConfig> = {
 	login: {
 		title: `Client Portal Login | ${SITE_NAME}`,
 		description:
-			"Access your Warespire client dashboard to track project progress, manage subscriptions, and collaborate with your dev team.",
+			"Access your insightstack client dashboard to track project progress, manage subscriptions, and collaborate with your dev team.",
 		keywords: [
 			"Client login",
 			"Project tracking portal",
-			"Warespire dashboard access",
+			"insightstack dashboard access",
 		],
 	},
 	register: {
 		title: `Partner with Us | Join ${SITE_NAME}`,
 		description:
-			"Create an account to start your project journey with warespire innovations and access premium tech resources.",
+			"Create an account to start your project journey with insightstack innovations and access premium tech resources.",
 		keywords: [
-			"Get started with Warespire",
+			"Get started with insightstack",
 			"Project onboarding",
 			"Digital partnership",
 		],

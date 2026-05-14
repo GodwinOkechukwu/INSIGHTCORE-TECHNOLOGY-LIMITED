@@ -170,7 +170,7 @@ const CategoryCard: React.FC<CardProps> = ({
         {name}
       </span>
       {/* animated arrow circle */}
-      <span className="w-7 h-7 rounded-full border border-white/[0.07] flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-[#c9a96e] group-hover:border-[#c9a96e] group-hover:rotate-45">
+      <span className="w-7 h-7 rounded-full border border-white/[0.07] flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-[#F2CA50] group-hover:border-[#F2CA50] group-hover:rotate-45">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -264,8 +264,8 @@ const MainCategoryContent = () => {
         />
 
         {/* Eyebrow pill */}
-        <div className="relative z-[2] inline-flex items-center gap-2 mb-7 px-4 py-1.5 rounded-full border border-[rgba(201,169,110,0.2)] bg-[rgba(201,169,110,0.08)] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c9a96e]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#c9a96e] animate-blink" />
+        <div className="relative z-[2] inline-flex items-center gap-2 mb-7 px-4 py-1.5 rounded-full border border-[rgba(201,169,110,0.2)] bg-[rgba(201,169,110,0.08)] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F2CA50]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F2CA50] animate-blink" />
           Curated Collection
         </div>
 
@@ -276,7 +276,7 @@ const MainCategoryContent = () => {
           <em
             className="not-italic"
             style={{
-              background: "linear-gradient(135deg, #c9a96e, #e8c98a)",
+              background: "linear-gradient(135deg, #F2CA50, #e8c98a)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -302,7 +302,7 @@ const MainCategoryContent = () => {
             key={t.label}
             className="flex items-center gap-2 px-[18px] py-2 rounded-full border border-white/[0.07] bg-white/[0.025] text-[13px] text-[#888480] transition-all duration-300 hover:text-[#f0ece4] hover:border-[rgba(201,169,110,0.2)] cursor-default"
           >
-            <span className="text-[#c9a96e] text-[15px]">{t.icon}</span>
+            <span className="text-[#F2CA50] text-[15px]">{t.icon}</span>
             {t.label}
           </div>
         ))}
@@ -375,7 +375,7 @@ const MainCategoryContent = () => {
           }}
         />
 
-        <p className="relative z-[1] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c9a96e] mb-4">
+        <p className="relative z-[1] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F2CA50] mb-4">
           New Arrivals
         </p>
         <h2 className="relative z-[1] font-serif text-[clamp(28px,4vw,48px)] font-semibold leading-[1.1] text-[#f0ece4] mb-3">
@@ -388,7 +388,7 @@ const MainCategoryContent = () => {
         </p>
         <Link
           href="/new-arrivals"
-          className="relative z-[1] inline-flex items-center gap-2 no-underline bg-[#c9a96e] text-[#0a0a0b] font-semibold text-[14px] tracking-[0.04em] uppercase px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-[#e8c98a] hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.4)]"
+          className="relative z-[1] inline-flex items-center gap-2 no-underline bg-[#F2CA50] text-[#0a0a0b] font-semibold text-[14px] tracking-[0.04em] uppercase px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-[#e8c98a] hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.4)]"
         >
           Shop New Arrivals
           <ArrowIcon />

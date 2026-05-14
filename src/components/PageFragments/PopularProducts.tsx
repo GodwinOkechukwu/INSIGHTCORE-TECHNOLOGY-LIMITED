@@ -25,6 +25,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { WooCommerce } from "@src/components/lib/woocommerce";
 import NewArrivalCard from "../Cards/NewArrivalCard";
 import PopularProductCard from "../Cards/PopularProductCard";
+import Link from "@node_modules/next/link";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Constants
@@ -232,12 +233,13 @@ export default function PopularProducts() {
           <p className="text-[#F2CA50] text-[11px]">CURATED SELECTION</p>
           <h1 className="font-playfair font-semibold text-3xl md:text-4xl lg:text-5xl text-[#E3E2E2] mb-3">
             The Collection
+            <Link
+              href="/category"
+              className="text-sm text-[12px] text-[#D0C5AF] underline underline-offset-8"
+            >
+              VIEW ALL PRODUCTS
+            </Link>
           </h1>
-          <p className="text-base md:text-lg text-gray-500">
-            {products.length > 0
-              ? `Trending right now — ${products.length} item${products.length !== 1 ? "s" : ""}`
-              : "Trending products will appear here"}
-          </p>
         </div>
 
         {/* ── Products Grid ───────────────────────────────────────────── */}

@@ -28,7 +28,7 @@ const ContactCard = ({
       return (
         <a
           href={`tel:${additionalText}`}
-          className="text-blue-600 font-medium text-sm hover:underline underline-offset-4 transition-colors hover:text-blue-700 break-all"
+          className="text-[#F2CA50] font-medium text-sm hover:underline underline-offset-4 transition-colors hover:text-blue-700 break-all"
         >
           {additionalText as string}
         </a>
@@ -38,7 +38,7 @@ const ContactCard = ({
       return (
         <a
           href={`mailto:${additionalText}`}
-          className="text-blue-600 font-medium text-sm hover:underline underline-offset-4 transition-colors hover:text-blue-700 break-all"
+          className="text-[#F2CA50] font-medium text-sm hover:underline underline-offset-4 transition-colors hover:text-blue-700 break-all"
         >
           {additionalText as string}
         </a>
@@ -65,10 +65,10 @@ const ContactCard = ({
   return (
     <div className="group relative flex flex-col items-center text-center bg-white border border-black/[0.07] rounded-2xl p-7 gap-4 overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)] transition-all duration-300 ease-[cubic-bezier(.22,.68,0,1.2)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.10),0_2px_8px_rgba(0,0,0,0.06)] hover:border-black/[0.12]">
       {/* Top accent slide-in line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-t-2xl" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#F2CA50] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-t-2xl" />
 
       {/* Icon */}
-      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-50 text-blue-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 shadow-[0_2px_8px_rgba(37,99,235,0.12)]">
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-50 text-[#F2CA50] transition-all duration-300 group-hover:bg-[#F2CA50] group-hover:text-white group-hover:scale-110 group-hover:rotate-3 shadow-[0_2px_8px_rgba(37,99,235,0.12)]">
         <span className="text-xl [&>svg]:w-5 [&>svg]:h-5">{icon}</span>
       </div>
 

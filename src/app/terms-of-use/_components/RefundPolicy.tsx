@@ -1,6 +1,6 @@
 import { useGeneralSettings } from "@src/components/lib/woocommerce";
 import React from "react";
-
+import { SITE_NAME } from "@constants/seoContants";
 const RefundPolicy = () => {
   const { data: generalSettings, isLoading, isError } = useGeneralSettings();
 
@@ -9,9 +9,10 @@ const RefundPolicy = () => {
   return (
     <div className="text-gray-600 space-y-6 text-xs sm:text-sm">
       <p>
-        At Warespire Innovations, we strive for 100% accuracy in every order.
-        Since we act as your procurement and logistics partner, our policy is
-        designed to be fair to both you and our international suppliers.
+        At <span className="font-bold text-slate-900">{SITE_NAME}</span> , we
+        strive for 100% accuracy in every order. Since we act as your
+        procurement and logistics partner, our policy is designed to be fair to
+        both you and our international suppliers.
       </p>
 
       <section>
